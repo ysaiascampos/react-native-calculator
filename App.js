@@ -1,6 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, memo} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
+const Title = memo(({ title }) => {
+  console.log('Renderizado!');
+  return <Text>{title}</Text>
+})
 
 export default function App() {
   const [cont, setCont] = useState(0)
@@ -13,9 +18,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text onPress={()=>incrementar()}>+</Text>
-      <Text>{cont}</Text>
-      <Text onPress={()=>decrementar()}>-</Text>
+      <Text style={styles.text} onPress={()=>incrementar()}>+</Text>
+      <Text style={styles.text}>{cont}</Text>
+      <Text style={styles.text} onPress={()=>decrementar()}>-</Text>
+      <Title title="hola soy titulo" />
       <StatusBar style="auto" />
     </View>
   );
@@ -27,6 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 35,
+    
   },
+  text: {
+    fontSize: 55,
+  }
 });
